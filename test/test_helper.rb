@@ -20,3 +20,9 @@ def User.generate_with_protected!(attributes={})
   user.save!
 end
 
+class Test::Unit::TestCase
+
+  def configure_plugin(fields={})
+    Setting.plugin_redmine_project_support_hours = fields.stringify_keys
+  end
+end
