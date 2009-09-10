@@ -17,5 +17,9 @@ module ProjectSupportHours
       hours_field = project.custom_value_for(ProjectSupportHours::Mapper.hours)
       hours_field ? hours_field.value.to_f : nil
     end
+
+    def self.total_hours_used_for(project)
+      project.time_entries.sum('hours')
+    end
   end
 end

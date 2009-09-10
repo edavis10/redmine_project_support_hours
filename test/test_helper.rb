@@ -18,6 +18,7 @@ def User.generate_with_protected!(attributes={})
     end
   end
   user.save!
+  user
 end
 
 # Helpers
