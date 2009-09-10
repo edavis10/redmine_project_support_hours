@@ -47,5 +47,27 @@ class ProjectSupportHours::CalculatorTest < Test::Unit::TestCase
 
   end
 
+  context '#total_support_hours_for' do
+
+    context 'configured project' do
+      should 'return the total support hours for the project' do
+        @project = Project.generate!
+        @total_hours_custom_field = ProjectCustomField.generate!(:field_format => 'float')
+        @project.custom_values << CustomValue.spawn(:custom_field => @total_hours_custom_field, :customized_id => @project, :value => '100.2595')
+        configure_plugin('hours_field' => @total_hours_custom_field.id.to_s)
+
+        assert_equal 100.2595, ProjectSupportHours::Calculator.total_support_hours_for(@project)
+      end
+    end
+
+    context 'not configured project' do
+      should 'return nil' do
+        @project = Project.generate!
+        assert_nil ProjectSupportHours::Calculator.total_support_hours_for(@project)
+      end
+    end
+
+  end
+
 end
 

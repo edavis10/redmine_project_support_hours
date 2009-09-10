@@ -11,5 +11,11 @@ module ProjectSupportHours
       end_date_field = project.custom_value_for(ProjectSupportHours::Mapper.end_date)
       end_date_field ? end_date_field.value : nil
     end
+    
+    # Gets the total support hours for the project if set
+    def self.total_support_hours_for(project)
+      hours_field = project.custom_value_for(ProjectSupportHours::Mapper.hours)
+      hours_field ? hours_field.value.to_f : nil
+    end
   end
 end
