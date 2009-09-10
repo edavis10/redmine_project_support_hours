@@ -20,9 +20,35 @@ def User.generate_with_protected!(attributes={})
   user.save!
 end
 
+# Helpers
 class Test::Unit::TestCase
-
   def configure_plugin(fields={})
     Setting.plugin_redmine_project_support_hours = fields.stringify_keys
+  end
+end
+
+# Shoulda
+class Test::Unit::TestCase
+  def self.should_get_the_project_custom_field_for(field_name, options)
+    method_call = options.delete(:using) || field_name
+    format = options.delete(:format) || 'string'
+
+    context "##{method_call}" do
+      should "return nil if the '#{field_name}' is not configured" do
+        assert_nil ProjectSupportHours::Mapper.send(method_call)
+      end
+
+      should "return nil if the ProjectCustomField doesn't exist for '#{field_name}'" do
+        configure_plugin(field_name.to_s => '100')
+        assert_nil ProjectSupportHours::Mapper.send(method_call)
+      end
+
+      should "return the ProjectCustomField for '#{field_name}'" do
+        custom_field = ProjectCustomField.generate!(:field_format => format)
+        configure_plugin(field_name.to_s => custom_field.id.to_s)
+      
+        assert_equal custom_field, ProjectSupportHours::Mapper.send(method_call)
+      end
+    end
   end
 end
