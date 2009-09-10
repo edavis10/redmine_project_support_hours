@@ -1,6 +1,3 @@
 [submodule "vendor/plugins/shmacros"]
 	path = vendor/plugins/shmacros
 	url = git://github.com/maxim/shmacros.git
-[submodule "vendor/plugins/object_daddy"]
-	path = vendor/plugins/object_daddy
-	url = git://github.com/flogic/object_daddy.git
