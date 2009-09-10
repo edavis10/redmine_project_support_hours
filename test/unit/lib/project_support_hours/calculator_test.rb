@@ -95,5 +95,36 @@ class ProjectSupportHours::CalculatorTest < Test::Unit::TestCase
 
   end
 
+  context '#total_hours_remaining_for' do
+    setup do
+      @project = Project.generate!
+    end
+
+    context 'configured project' do
+      setup do
+        setup_plugin_configuration
+      end
+
+      should "return the balance of the hours that have not been used" do
+        user = User.generate_with_protected!
+        activity = TimeEntryActivity.generate!
+        @project.custom_values << CustomValue.spawn(:custom_field => @hours_custom_field, :customized_id => @project, :value => '20.585')
+      
+        assert_difference 'TimeEntry.count', 2 do
+          TimeEntry.generate!(:user => user, :activity => activity, :project => @project, :hours => 5.50)
+          TimeEntry.generate!(:user => user, :activity => activity, :project => @project, :hours => 2.00)
+        end
+
+        assert_equal 13.085, ProjectSupportHours::Calculator.total_hours_remaining_for(@project)
+      end
+    end
+
+    context 'not configured project' do
+      should 'return nil' do
+        assert_nil ProjectSupportHours::Calculator.total_hours_remaining_for(@project)
+      end
+    end
+  end
+
 end
 

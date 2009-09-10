@@ -21,5 +21,14 @@ module ProjectSupportHours
     def self.total_hours_used_for(project)
       project.time_entries.sum('hours')
     end
+
+    def self.total_hours_remaining_for(project)
+      total_hours = total_support_hours_for(project)
+      if total_hours
+        total_hours - total_hours_used_for(project)
+      else
+        nil
+      end
+    end
   end
 end
