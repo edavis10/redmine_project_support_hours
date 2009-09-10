@@ -25,6 +25,18 @@ class Test::Unit::TestCase
   def configure_plugin(fields={})
     Setting.plugin_redmine_project_support_hours = fields.stringify_keys
   end
+
+  def setup_plugin_configuration
+    @hours_custom_field = ProjectCustomField.generate!(:field_format => 'float')
+    @start_date_custom_field = ProjectCustomField.generate!(:field_format => 'date')
+    @end_date_custom_field = ProjectCustomField.generate!(:field_format => 'date')
+
+    configure_plugin({
+                       'hours_field' => @hours_custom_field.id.to_s,
+                       'start_date_field' => @start_date_custom_field.id.to_s,
+                       'end_date_field' => @end_date_custom_field.id.to_s
+                     })
+  end
 end
 
 # Shoulda
