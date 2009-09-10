@@ -1,0 +1,19 @@
+<%
+def custom_field_config(option_name, field_format, current_value)
+  label = content_tag(:label, l("project_support_hours_#{option_name}_label".to_sym))
+  select = select_tag("settings[#{option_name}]",
+                      content_tag(:option, '') +
+                        options_from_collection_for_select(ProjectCustomField.all(:conditions => {:field_format => field_format}), :id, :name, current_value))
+  return content_tag(:p, label + select)
+end
+%>
+
+<fieldset>
+  <%= content_tag(:legend, l(:project_support_hours_text_settings)) %>
+
+  <%= content_tag(:p, l(:project_support_hours_settings_help)) %>
+
+  <%= custom_field_config('hours_field', 'float', @settings['hours_field'].to_i) %>
+  <%= custom_field_config('start_date_field', 'date', @settings['start_date_field'].to_i) %>
+  <%= custom_field_config('end_date_field', 'date', @settings['end_date_field'].to_i) %>
+</fieldset>

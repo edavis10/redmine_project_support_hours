@@ -28,4 +28,13 @@ Redmine::Plugin.register :redmine_project_support_hours do
   author 'Author name'
   description 'This is a plugin for Redmine'
   version '0.0.1'
+
+  settings({
+             :partial => 'settings/project_support_hours',
+             :default => {
+               'hours_field' => nil,
+               'start_date_field' => nil,
+               'end_date_field' => nil
+             }})
+
 end
