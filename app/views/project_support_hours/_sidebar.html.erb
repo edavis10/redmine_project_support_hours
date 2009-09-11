@@ -1,5 +1,5 @@
 <div id="project-support-hours">
-<h3>Support Time</h3>
+<%= content_tag(:h3, l(:project_support_hours_text_section_header)) %>
 <p class="support-hours">
   <span class="icon icon-time">
     <%= h hours_label %>
@@ -7,12 +7,12 @@
 </p>
 <% if start_date.present? %>
 <p class="start-date">
-  Started on <%= format_date(start_date) %>
+  <%= l(:project_support_hours_start_date_field_text, :date => format_date(start_date)) %>
 </p>
 <% end %>
 <% if end_date.present? %>
 <p class="end-date">
-  Ending on <%= format_date(end_date) %>
+  <%= l(:project_support_hours_end_date_field_text, :date => format_date(end_date)) %>
 </p>
 <% end %>
 </div>
