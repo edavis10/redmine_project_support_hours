@@ -1,7 +1,7 @@
 # English strings go here for Rails i18n
 en:
   project_support_hours_text_settings: "Configuration fields"
-  project_support_hours_settings_help: "Configure your project custom fields here."
+  project_support_hours_settings_help: "The data for project support hours and dates are saved to each project in a Custom Field.  Please select which fields to use for each data element:"
   project_support_hours_hours_field_label: "Support hours"
   project_support_hours_start_date_field_label: "Start date"
   project_support_hours_end_date_field_label: "End date"
