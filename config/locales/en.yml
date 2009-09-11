@@ -9,4 +9,4 @@ en:
   project_support_hours_end_date_field_text: "Ending on {{date}}"
   project_support_hours_text_hour_report: "{{remaining}} hours of {{total}} hours ({{used}} hours used)"
   project_support_hours_text_section_header: "Support Time"
-
+  project_support_hours_missing_custom_field: "Missing a '{{field_format}}' Custom Field for Projects.  Please create one first."
