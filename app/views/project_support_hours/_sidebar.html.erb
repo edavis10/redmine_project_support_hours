@@ -1,0 +1,18 @@
+<div id="project-support-hours">
+<h3>Support Time</h3>
+<p class="support-hours">
+  <span class="icon icon-time">
+    <%= h hours_label %>
+  </span>
+</p>
+<% if start_date.present? %>
+<p class="start-date">
+  Started on <%= format_date(start_date) %>
+</p>
+<% end %>
+<% if end_date.present? %>
+<p class="end-date">
+  Ending on <%= format_date(end_date) %>
+</p>
+<% end %>
+</div>

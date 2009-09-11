@@ -23,6 +23,8 @@ if Rails.env == "test"
   end
 end
 
+require 'project_support_hours/hooks/project_hooks'
+
 Redmine::Plugin.register :redmine_project_support_hours do
   name 'Redmine Project Support Hours plugin'
   author 'Author name'
