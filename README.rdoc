@@ -17,6 +17,7 @@ A copy of the plugin can be downloaded from {Little Stream Software}[https://pro
 2. Run the plugin migrations +rake db:migrate_plugins+
 3. Restart your Redmine web servers (e.g. mongrel, thin, mod_rails)
 4. __XXX__
+5. Apply the patch using -p1 (patches/projects-show-sidebar.patch)
 
 == Usage
 

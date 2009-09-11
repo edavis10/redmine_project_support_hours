@@ -1,0 +1,12 @@
+diff --git a/app/views/projects/show.rhtml b/app/views/projects/show.rhtml
+index c1f3f65..250e851 100644
+--- a/app/views/projects/show.rhtml
++++ b/app/views/projects/show.rhtml
+@@ -70,6 +70,7 @@
+     <p><%= link_to(l(:label_details), {:controller => 'timelog', :action => 'details', :project_id => @project}) %> |
+     <%= link_to(l(:label_report), {:controller => 'timelog', :action => 'report', :project_id => @project}) %></p>
+     <% end %>
++    <%= call_hook(:view_projects_show_sidebar_bottom, :project => @project) %>
+ <% end %>
+ 
+ <% content_for :header_tags do %>
