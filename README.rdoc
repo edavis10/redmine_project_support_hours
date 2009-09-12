@@ -29,7 +29,7 @@ This plugin requires a specific plugin hook for Redmine.  If you are running Red
 The patch is provided in <tt>patches/projects-show-sidebar.patch</tt>.  Make sure you are in the *Redmine* root when running the following command:
 
 <tt>
-$ patch -p1 < vendor/plugins/redmine_project_support_hours.patch
+$ patch -p1 < vendor/plugins/redmine_project_support_hours/patches/projects-show-sidebar.patch
 </tt>
 
 Make sure there is no conflicts or other errors before continuing.  You can also apply the patch by hand as it is only one line of code that is changed.
