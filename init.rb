@@ -26,10 +26,14 @@ end
 require 'project_support_hours/hooks/project_hooks'
 
 Redmine::Plugin.register :redmine_project_support_hours do
-  name 'Redmine Project Support Hours plugin'
-  author 'Author name'
-  description 'This is a plugin for Redmine'
-  version '0.0.1'
+  name 'Project Support Hours'
+  author 'Eric Davis'
+  url 'https://projects.littlestreamsoftware.com/projects/support-hours'
+  author_url 'http://www.littlestreamsoftware.com'
+  description 'Project Support Hours is a plugin to implement per-project buckets of hours that are used for support.'
+  version '0.1.0'
+
+  requires_redmine :version_or_higher => '0.8.0'
 
   settings({
              :partial => 'settings/project_support_hours',
