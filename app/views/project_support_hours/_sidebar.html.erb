@@ -1,18 +1,26 @@
+<style type="text/css">
+#project-support-hours ul {list-style: none; padding-left: 0;}
+</style>
+
 <div id="project-support-hours">
 <%= content_tag(:h3, l(:project_support_hours_text_section_header)) %>
-<p class="support-hours">
-  <span class="icon icon-time">
-    <%= h hours_label %>
-  </span>
-</p>
-<% if start_date.present? %>
-<p class="start-date">
-  <%= l(:project_support_hours_start_date_field_text, :date => format_date(start_date)) %>
-</p>
-<% end %>
-<% if end_date.present? %>
-<p class="end-date">
-  <%= l(:project_support_hours_end_date_field_text, :date => format_date(end_date)) %>
-</p>
-<% end %>
+<ul id="project-support-hours-details">
+  <li class="support-hours-total">
+    <%= l(:project_support_hours_total_hours_field_text, :hours => total_hours) %>
+  </li>
+  <li class="support-hours-remaining">
+    <%= l(:project_support_hours_remaining_hours_field_text, :hours => remaining_hours) %>
+  </li>
+  <% if start_date.present? %>
+  <li class="start-date">
+    <%= l(:project_support_hours_start_date_field_text, :date => format_date(start_date)) %>
+  </li>
+  <% end %>
+
+  <% if end_date.present? %>
+  <li class="end-date">
+    <%= l(:project_support_hours_end_date_field_text, :date => format_date(end_date)) %>
+  </li>
+  <% end %>
+</ul>
 </div>
