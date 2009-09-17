@@ -24,6 +24,7 @@ if Rails.env == "test"
 end
 
 require 'project_support_hours/hooks/project_hooks'
+require 'project_support_hours/hooks/external_signups_hooks'
 
 Redmine::Plugin.register :redmine_project_support_hours do
   name 'Project Support Hours'

@@ -1,6 +1,6 @@
 require File.dirname(__FILE__) + '/../../../../test_helper'
 
-class ProjectSupportHours::Hooks::ExternalSignupsHooks < Test::Unit::TestCase
+class ProjectSupportHours::Hooks::ExternalSignupsHooksTest < Test::Unit::TestCase
   include Redmine::Hook::Helper
 
   def controller
@@ -34,9 +34,24 @@ class ProjectSupportHours::Hooks::ExternalSignupsHooks < Test::Unit::TestCase
     end
     
     context "for hours" do
-      should "do nothing if the hours_field is not configured"
-      should "do nothing if the form paramters don't have hours"
-      should "save the form parameters to the project"
+      should "do nothing if the hours_field is not configured" do
+        configure_plugin('hours_field' => nil)
+        hook :project => @project, :user => @user
+        field = @project.custom_values.find_by_custom_field_id(@hours_custom_field)
+        assert_equal nil, field.value
+      end
+
+      should "do nothing if the form paramters don't have hours" do
+        hook :project => @project, :user => @user
+        field = @project.custom_values.find_by_custom_field_id(@hours_custom_field)
+        assert_equal nil, field.value
+      end
+
+      should "save the form parameters to the project" do
+        hook :project => @project, :user => @user, :params => {:support => {:hours => 10.2}}
+        field = @project.custom_value_for(@hours_custom_field)
+        assert_equal 10.2, field.value
+      end
     end
     
     context "for start date" do
