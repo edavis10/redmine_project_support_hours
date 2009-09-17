@@ -12,7 +12,19 @@ module ProjectSupportHours
             field = context[:project].custom_value_for(configuration['hours_field'])
             field.value = params[:support][:hours] if field
           end
-          
+
+          # Start date
+          if params[:support][:start_date] && configuration['start_date_field'].present?
+            field = context[:project].custom_value_for(configuration['start_date_field'])
+            field.value = params[:support][:start_date] if field
+          end
+
+          # End date
+          if params[:support][:end_date] && configuration['end_date_field'].present?
+            field = context[:project].custom_value_for(configuration['end_date_field'])
+            field.value = params[:support][:end_date] if field
+          end
+
         end
       end
 

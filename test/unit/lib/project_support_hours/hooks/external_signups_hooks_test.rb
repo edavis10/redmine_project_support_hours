@@ -36,7 +36,7 @@ class ProjectSupportHours::Hooks::ExternalSignupsHooksTest < Test::Unit::TestCas
     context "for hours" do
       should "do nothing if the hours_field is not configured" do
         configure_plugin('hours_field' => nil)
-        hook :project => @project, :user => @user
+        hook :project => @project, :user => @user, :params => {:support => {:hours => 10.2}}
         field = @project.custom_values.find_by_custom_field_id(@hours_custom_field)
         assert_equal nil, field.value
       end
@@ -55,15 +55,45 @@ class ProjectSupportHours::Hooks::ExternalSignupsHooksTest < Test::Unit::TestCas
     end
     
     context "for start date" do
-      should "do nothing if the start_date_field is not configured"
-      should "do nothing if the form paramters don't have a start date"
-      should "save the form parameters to the project"
+      should "do nothing if the start_date_field is not configured" do
+        configure_plugin('start_date_field' => nil)
+        hook :project => @project, :user => @user, :params => {:support => {:start_date => '2009-09-01'}}
+        field = @project.custom_value_for(@start_date_custom_field)
+        assert_equal nil, field.value
+      end
+
+      should "do nothing if the form paramters don't have start_date" do
+        hook :project => @project, :user => @user
+        field = @project.custom_value_for(@start_date_custom_field)
+        assert_equal nil, field.value
+      end
+
+      should "save the form parameters to the project" do
+        hook :project => @project, :user => @user, :params => {:support => {:start_date => '2009-09-01'}}
+        field = @project.custom_value_for(@start_date_custom_field)
+        assert_equal '2009-09-01', field.value
+      end
     end
 
     context "for end date" do
-      should "do nothing if the end_date_field is not configured"
-      should "do nothing if the form paramters don't have a end date"
-      should "save the form parameters to the project"
+      should "do nothing if the end_date_field is not configured" do
+        configure_plugin('end_date_field' => nil)
+        hook :project => @project, :user => @user, :params => {:support => {:end_date => '2009-09-22'}}
+        field = @project.custom_value_for(@end_date_custom_field)
+        assert_equal nil, field.value
+      end
+
+      should "do nothing if the form paramters don't have end_date" do
+        hook :project => @project, :user => @user
+        field = @project.custom_value_for(@end_date_custom_field)
+        assert_equal nil, field.value
+      end
+
+      should "save the form parameters to the project" do
+        hook :project => @project, :user => @user, :params => {:support => {:end_date => '2009-09-22'}}
+        field = @project.custom_value_for(@end_date_custom_field)
+        assert_equal '2009-09-22', field.value
+      end
     end
 
   end
