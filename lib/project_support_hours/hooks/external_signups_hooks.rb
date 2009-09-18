@@ -17,8 +17,16 @@ module ProjectSupportHours
 
       def set_custom_value_on_project(project, custom_field, param)
         if param && custom_field.present?
-          field = project.custom_value_for(custom_field)
-          field.value = param if field
+          custom_field_record = CustomField.find_by_id(custom_field)
+
+          if custom_field_record
+            field = project.custom_value_for(custom_field_record)
+            if field
+              field.value = param
+            else
+              project.custom_values.build(:custom_field => custom_field_record, :value => param)
+            end
+          end
         end
       end
 
