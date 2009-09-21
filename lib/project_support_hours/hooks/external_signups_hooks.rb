@@ -7,10 +7,15 @@ module ProjectSupportHours
         params = context[:params]
 
         if params && params[:support]
-          set_custom_value_on_project(context[:project], configuration['hours_field'], params[:support][:hours])
+          set_custom_value_on_project(context[:project], configuration['hours_field'], params[:support][:hours].to_f)
           set_custom_value_on_project(context[:project], configuration['start_date_field'], params[:support][:start_date])
           set_custom_value_on_project(context[:project], configuration['end_date_field'], params[:support][:end_date])
         end
+      end
+
+      def plugin_external_signup_controller_external_signups_update(context={})
+        plugin_external_signup_controller_external_signups_create_pre_validate(context)
+        context[:project].save
       end
 
       private

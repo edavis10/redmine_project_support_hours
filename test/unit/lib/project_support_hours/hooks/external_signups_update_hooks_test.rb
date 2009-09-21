@@ -40,8 +40,9 @@ class ProjectSupportHours::Hooks::ExternalSignupsUpdateHooksTest < Test::Unit::T
 
       should "save the form parameters to the project" do
         hook :project => @project, :user => @user, :params => {:support => {:hours => 10.2}}
+        @project.reload
         field = @project.custom_value_for(@hours_custom_field)
-        assert_equal 10.2, field.value
+        assert_equal 10.2, field.value.to_f
       end
     end
     
@@ -61,6 +62,7 @@ class ProjectSupportHours::Hooks::ExternalSignupsUpdateHooksTest < Test::Unit::T
 
       should "save the form parameters to the project" do
         hook :project => @project, :user => @user, :params => {:support => {:start_date => '2009-09-01'}}
+        @project.reload
         field = @project.custom_value_for(@start_date_custom_field)
         assert_equal '2009-09-01', field.value
       end
@@ -82,6 +84,7 @@ class ProjectSupportHours::Hooks::ExternalSignupsUpdateHooksTest < Test::Unit::T
 
       should "save the form parameters to the project" do
         hook :project => @project, :user => @user, :params => {:support => {:end_date => '2009-09-22'}}
+        @project.reload
         field = @project.custom_value_for(@end_date_custom_field)
         assert_equal '2009-09-22', field.value
       end
