@@ -3,6 +3,17 @@ module ProjectSupportHours
     class ExternalSignupsHooks < Redmine::Hook::ViewListener
 
       def plugin_external_signup_controller_external_signups_create_pre_validate(context={})
+        update_signup_controller_data(context)
+      end
+
+      def plugin_external_signup_controller_external_signups_update(context={})
+        update_signup_controller_data(context)
+        context[:project].save
+      end
+
+      private
+
+      def update_signup_controller_data(context)
         configuration = Setting.plugin_redmine_project_support_hours
         params = context[:params]
 
@@ -12,13 +23,6 @@ module ProjectSupportHours
           set_custom_value_on_project(context[:project], configuration['end_date_field'], params[:support][:end_date])
         end
       end
-
-      def plugin_external_signup_controller_external_signups_update(context={})
-        plugin_external_signup_controller_external_signups_create_pre_validate(context)
-        context[:project].save
-      end
-
-      private
 
       def set_custom_value_on_project(project, custom_field, param)
         if param && custom_field.present?
