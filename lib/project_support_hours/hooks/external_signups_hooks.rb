@@ -8,7 +8,9 @@ module ProjectSupportHours
 
       def plugin_external_signup_controller_external_signups_update(context={})
         update_signup_controller_data(context)
-        context[:project].save
+        if context[:project]
+          context[:project].save
+        end
       end
 
       private
@@ -17,7 +19,7 @@ module ProjectSupportHours
         configuration = Setting.plugin_redmine_project_support_hours
         params = context[:params]
 
-        if params && params[:support]
+        if params && params[:support] && context[:project]
           set_custom_value_on_project(context[:project], configuration['hours_field'], params[:support][:hours].to_f)
           set_custom_value_on_project(context[:project], configuration['start_date_field'], params[:support][:start_date])
           set_custom_value_on_project(context[:project], configuration['end_date_field'], params[:support][:end_date])
