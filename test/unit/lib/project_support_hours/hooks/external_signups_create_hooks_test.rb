@@ -1,6 +1,6 @@
 require File.dirname(__FILE__) + '/../../../../test_helper'
 
-class ProjectSupportHours::Hooks::ExternalSignupsHooksTest < Test::Unit::TestCase
+class ProjectSupportHours::Hooks::ExternalSignupsCreateHooksTest < Test::Unit::TestCase
   include Redmine::Hook::Helper
 
   def controller
