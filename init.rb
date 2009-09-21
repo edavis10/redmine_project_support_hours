@@ -32,7 +32,7 @@ Redmine::Plugin.register :redmine_project_support_hours do
   url 'https://projects.littlestreamsoftware.com/projects/support-hours'
   author_url 'http://www.littlestreamsoftware.com'
   description 'Project Support Hours is a plugin to implement per-project buckets of hours that are used for support.'
-  version '0.1.1'
+  version '0.1.2'
 
   requires_redmine :version_or_higher => '0.8.0'
 
