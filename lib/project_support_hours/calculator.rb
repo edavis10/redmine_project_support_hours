@@ -19,7 +19,8 @@ module ProjectSupportHours
     end
 
     def self.total_hours_used_for(project)
-      project.time_entries.sum('hours')
+      project.time_entries.sum('hours', :conditions => ["activity_id NOT IN (?)",
+                                                        Setting.plugin_redmine_project_support_hours['excluded_activities']])
     end
 
     def self.total_hours_remaining_for(project)

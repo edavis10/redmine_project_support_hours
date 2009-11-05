@@ -22,4 +22,28 @@ end
   <%= custom_field_config('hours_field', 'float', @settings['hours_field'].to_i) %>
   <%= custom_field_config('start_date_field', 'date', @settings['start_date_field'].to_i) %>
   <%= custom_field_config('end_date_field', 'date', @settings['end_date_field'].to_i) %>
+
+  <%= content_tag(:p, l(:project_support_hours_settings_activity_help)) %>
+
+  <p>
+    <%= content_tag(:label, l(:project_support_hours_excluded_activities)) %>
+
+    <%-
+      activities = TimeEntryActivity.all
+      selected = @settings['excluded_activities'].collect(&:to_i) unless @settings['excluded_activities'].blank?
+      selected ||= []
+    -%>
+
+    <% unless activities.empty? %>
+    <%=
+      select_tag("settings[excluded_activities]",
+                 content_tag(:option, '') + options_from_collection_for_select(activities, :id, :name, selected ),
+                 :multiple => true,
+                 :size => 5)
+    %>
+    <% else %>
+      <%= link_to(l(:project_support_hours_missing_activities), :controller => 'enumerations', :action => 'index') %>
+   <% end %>
+  </p>
+
 </fieldset>

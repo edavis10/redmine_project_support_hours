@@ -2,6 +2,7 @@
 en:
   project_support_hours_text_settings: "Configuration fields"
   project_support_hours_settings_help: "The data for project support hours and dates are saved to each project in a Custom Field.  Please select which fields to use for each data element:"
+  project_support_hours_settings_activity_help: "Support time will include all Time Entries except for the following Activities:"
   project_support_hours_hours_field_label: "Support hours"
   project_support_hours_start_date_field_label: "Start date"
   project_support_hours_end_date_field_label: "End date"
@@ -11,3 +12,5 @@ en:
   project_support_hours_remaining_hours_field_text: "Hours Remaining: {{hours}}"
   project_support_hours_text_section_header: "Support Time"
   project_support_hours_missing_custom_field: "Missing a '{{field_format}}' Custom Field for Projects.  Please create one first."
+  project_support_hours_missing_activities: "Missing a Time Entry Activity.  Please create one first."
+  project_support_hours_excluded_activities: "Exclude these activities from the support hours"

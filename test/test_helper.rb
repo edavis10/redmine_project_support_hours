@@ -28,10 +28,12 @@ class Test::Unit::TestCase
     @start_date_custom_field = ProjectCustomField.generate!(:field_format => 'date')
     @end_date_custom_field = ProjectCustomField.generate!(:field_format => 'date')
 
+    @excluded_time_entry_activity = TimeEntryActivity.generate!
     configure_plugin({
                        'hours_field' => @hours_custom_field.id.to_s,
                        'start_date_field' => @start_date_custom_field.id.to_s,
-                       'end_date_field' => @end_date_custom_field.id.to_s
+                       'end_date_field' => @end_date_custom_field.id.to_s,
+                       'excluded_activities' => [@excluded_time_entry_activity.id.to_s]
                      })
   end
 

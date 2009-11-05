@@ -25,7 +25,8 @@ Redmine::Plugin.register :redmine_project_support_hours do
              :default => {
                'hours_field' => nil,
                'start_date_field' => nil,
-               'end_date_field' => nil
+               'end_date_field' => nil,
+               'excluded_activities' => []
              }})
 
 end
