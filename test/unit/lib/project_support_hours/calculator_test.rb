@@ -1,6 +1,6 @@
 require File.dirname(__FILE__) + '/../../../test_helper'
 
-class ProjectSupportHours::CalculatorTest < Test::Unit::TestCase
+class ProjectSupportHours::CalculatorTest < ActiveSupport::TestCase
   context '#start_date_for' do
     setup do
       @project = Project.generate!

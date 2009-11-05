@@ -1,5 +1,7 @@
 require File.dirname(__FILE__) + '/../../../../test_helper'
 
+if Redmine::Plugin.all.collect(&:id).include? :redmine_external_signup
+  
 class ProjectSupportHours::Hooks::ExternalSignupsUpdateHooksTest < Test::Unit::TestCase
   include Redmine::Hook::Helper
 
@@ -24,4 +26,8 @@ class ProjectSupportHours::Hooks::ExternalSignupsUpdateHooksTest < Test::Unit::T
     end
 
   end
+end
+
+else
+print 'P'
 end

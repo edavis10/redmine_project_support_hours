@@ -9,6 +9,8 @@ class ProjectOverviewHooksTest < ActionController::IntegrationTest
     setup do
       @project = Project.generate!
       setup_plugin_configuration
+      setup_non_member_role
+      setup_anonymous_role
     end
 
     context "in the support time section" do

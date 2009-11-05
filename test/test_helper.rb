@@ -4,11 +4,6 @@ require File.expand_path(File.dirname(__FILE__) + '/../../../../test/test_helper
 # Ensure that we are using the temporary fixture path
 Engines::Testing.set_fixture_path
 
-Rails::Initializer.run do |config|
-  config.gem "thoughtbot-shoulda", :lib => "shoulda", :source => "http://gems.github.com"
-  config.gem "nofxx-object_daddy", :lib => "object_daddy", :source => "http://gems.github.com"
-end
-
 # TODO: The gem or official version of ObjectDaddy doesn't set protected attributes.
 def User.generate_with_protected!(attributes={})
   user = User.spawn(attributes) do |user|
@@ -28,6 +23,7 @@ class Test::Unit::TestCase
   end
 
   def setup_plugin_configuration
+    ProjectCustomField.destroy_all # TODO: figure out the validation issues
     @hours_custom_field = ProjectCustomField.generate!(:field_format => 'float')
     @start_date_custom_field = ProjectCustomField.generate!(:field_format => 'date')
     @end_date_custom_field = ProjectCustomField.generate!(:field_format => 'date')
@@ -38,6 +34,17 @@ class Test::Unit::TestCase
                        'end_date_field' => @end_date_custom_field.id.to_s
                      })
   end
+
+  def setup_anonymous_role
+    @anon_role = Role.generate!
+    @anon_role.update_attribute(:builtin, Role::BUILTIN_ANONYMOUS)
+  end
+
+  def setup_non_member_role
+    @non_member_role = Role.generate!
+    @non_member_role.update_attribute(:builtin, Role::BUILTIN_NON_MEMBER)
+  end
+
 end
 
 # Shoulda
