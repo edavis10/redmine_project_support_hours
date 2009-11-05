@@ -8,6 +8,7 @@ Project Support Hours is a plugin to implement per-project buckets of hours that
   * Support hours
   * Project start date
   * Project end date
+  * Activities to exclude from the support hours
 * Project overview will display:
   * Support hours used
   * Support hours left
